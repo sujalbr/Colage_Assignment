@@ -11,13 +11,13 @@ class WeatherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // Dynamic current time
     final now = DateTime.now();
-    final formattedTime = DateFormat('hh:mm a').format(now); // e.g., "01:30 PM"
-    final formattedDate = DateFormat('MMMM d, yyyy').format(now); // e.g., "July 25, 2023" for list items
+    final formattedTime = DateFormat('hh:mm a').format(now);
+    final formattedDate = DateFormat('MMMM d, yyyy').format(now);
 
-    // Normalize temperature for gauge progress (assuming range 10-30°C as in image)
-    final minTemp = 10.0; // Dummy; replace with weather.minTemp if added to model
-    final maxTemp = 30.0; // Dummy; replace with weather.maxTemp
-    final progress = (weather.temperature - minTemp) / (maxTemp - minTemp).clamp(0.0, 1.0);
+    final minTemp = 10.0;
+    final maxTemp = 30.0;
+    final progress =
+        (weather.temperature - minTemp) / (maxTemp - minTemp).clamp(0.0, 1.0);
 
     // Determine label based on description (adapt available data)
     String getLabel(double temp) {
@@ -41,7 +41,10 @@ class WeatherCard extends StatelessWidget {
               children: [
                 Text(
                   'Temperature in ${weather.city}',
-                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.grey),
+                  style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey),
                 ),
                 const SizedBox(width: 8),
                 Image.network(
@@ -65,38 +68,43 @@ class WeatherCard extends StatelessWidget {
                       value: progress, // Based on temperature
                       strokeWidth: 8,
                       backgroundColor: Colors.grey[200],
-                      valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
+                      valueColor:
+                          const AlwaysStoppedAnimation<Color>(Colors.blue),
                     ),
                   ),
                   Column(
                     children: [
                       Text(
                         '${weather.temperature}°C',
-                        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                       // const Text('Goal 30°C', style: TextStyle(fontSize: 14, color: Colors.grey)),
                     ],
                   ),
-                  SizedBox(height: 5,),
                   Positioned(
                     left: 0,
-                    bottom: 50,
+                    bottom: 40,
                     child: Row(
                       children: [
-                        const Icon(Icons.remove_circle_outline, color: Colors.grey),
+                        const Icon(Icons.remove_circle_outline,
+                            color: Colors.grey),
                         const SizedBox(width: 4),
-                        Text('${minTemp.toInt()}°C', style: const TextStyle(color: Colors.grey)),
+                        Text('${minTemp.toInt()}°C',
+                            style: const TextStyle(color: Colors.grey)),
                       ],
                     ),
                   ),
                   Positioned(
                     right: 0,
-                    bottom: 50,
+                    bottom: 40,
                     child: Row(
                       children: [
-                        Text('${maxTemp.toInt()}°C', style: const TextStyle(color: Colors.grey)),
+                        Text('${maxTemp.toInt()}°C',
+                            style: const TextStyle(color: Colors.grey)),
                         const SizedBox(width: 4),
-                        const Icon(Icons.add_circle_outline, color: Colors.grey),
+                        const Icon(Icons.add_circle_outline,
+                            color: Colors.grey),
                       ],
                     ),
                   ),
@@ -106,12 +114,15 @@ class WeatherCard extends StatelessWidget {
             const SizedBox(height: 16),
 
             // Time Display
-            Center(
-              child: Text(
-                'Time: $formattedTime',
-                style: const TextStyle(fontSize: 16, color: Colors.blue, fontWeight: FontWeight.bold),
-              ),
-            ),
+            // Center(
+            //   child: Text(
+            //     'Time: $formattedTime',
+            //     style: const TextStyle(
+            //         fontSize: 16,
+            //         color: Colors.blue,
+            //         fontWeight: FontWeight.bold),
+            //   ),
+            // ),
             const SizedBox(height: 16),
 
             // List of Items (Adapted from available data; use dummies for simulation)
@@ -123,7 +134,8 @@ class WeatherCard extends StatelessWidget {
             ),
             _buildListItem(
               isChecked: false,
-              temp: 20, // Dummy; replace with real data (e.g., from model extension)
+              temp:
+                  20, // Dummy; replace with real data (e.g., from model extension)
               label: 'Bad',
               timestamp: '$formattedTime, $formattedDate',
             ),
@@ -157,7 +169,8 @@ class WeatherCard extends StatelessWidget {
           ),
           Text('$temp°C ($label)', style: const TextStyle(fontSize: 16)),
           const Spacer(),
-          Text(timestamp, style: const TextStyle(fontSize: 14, color: Colors.grey)),
+          // Text(timestamp,
+          //     style: const TextStyle(fontSize: 14, color: Colors.grey)),
         ],
       ),
     );

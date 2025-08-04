@@ -7,8 +7,8 @@ plugins {
 
 android {
     namespace = "com.bibha.w_appapp"
-    compileSdk = 34
-    ndkVersion = "26.1.10909125" // Optional: match your Flutter installation
+    compileSdk = 35
+    ndkVersion = "27.0.12077973" // Optional: match your Flutter installation
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -41,3 +41,8 @@ android {
 flutter {
     source = "../.."
 }
+dependencies {
+    implementation 'com.google.android.gms:play-services-auth:20.7.0' // use latest
+}
+classpath 'com.google.gms:google-services:4.4.0' // or latest
+apply plugin: 'com.google.gms.google-services'
